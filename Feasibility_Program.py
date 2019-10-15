@@ -1,6 +1,7 @@
 from itertools import product
 from scipy.optimize import least_squares
 import numpy as np
+import Gerador_Nplayers as ger
 
 
 ##@file funcoes.py
@@ -63,6 +64,23 @@ def splitVar(x, listofSupport, listNotSupport,nPlayers,nActions,nActionsSup,nAct
 
 
     return [listaP,listaV,listaF]
+
+def gera_utilidade2(jogador,acao, listaAopp,lista_par, Acoes):
+    #lista_par =[lista_perf,media,desv,VendasTotais,Orc,Gamma]
+    densPerf = ger.densidade(lista_par[0],lista_par[1],lista_par[2],lista_par[3])
+    n = len(listaAopp)
+    port = []
+    for j in range(n):
+        if j == jogador:
+            port.append(Acoes[jogador][acao])
+        else:
+            if j < jogador:
+                port.append(Acoes[j][listaAopp[j]])
+            else:
+                port.append(Acoes[j][listaAopp[j-1]])
+
+    payoff = ger.calc_Payoff(port,lista_par[0],densPerf,lista_par[2],lista_par[3])
+    return payoff[jogador]
 
 
 def gera_utilidade(jogador,acao, listaAopp, Utilidade): #retorna o payoff do jogador fixo a partir das ações dos demais jogadores
@@ -159,11 +177,13 @@ acoes =[[0, 1], [0, 1], [0, 1]]
 
 prob_acao = [[0.25, 0.75], [0.40, 0.60], [0.80, 0.20]]
 
-def fun_FeasibilityProblem(x0,arg1,arg2,arg3):
+def fun_FeasibilityProblem(x0,arg1,arg2,arg3,arg4,arg5):
     # assume que a lista de ações e a lista de suporte possuem o mesmo número de listas (= nplayers)
     nPlayers = arg1
     listofActions = arg2
     listofSupport = arg3
+    Acoes_det = arg4
+    lista_par = arg5
     nActions = 0
     nActionsSup = 0
     nActionsNotSup = 0
@@ -186,7 +206,7 @@ def fun_FeasibilityProblem(x0,arg1,arg2,arg3):
     [[[0.24, 0.23], [0.40, 0.18]], [[0.26, 0.40], [0.18, 0.24]]], [[[0.34, 0.40], [0.26, 0.22]], [[0.34, 0.26], [0.60, 0.34]]]])
     return np.array(r1+r2+r3)
 
-def FeasibilityProblem1(listofActions,listofSupport):
+def FeasibilityProblem1(listofActions,listofSupport,Acoes_det,lista_par):
 
     n = len(listofActions)
     x0 = []
@@ -209,7 +229,7 @@ def FeasibilityProblem1(listofActions,listofSupport):
             lb.append(0.0)
             ub.append(np.inf)
 
-    res_1 = least_squares(fun_FeasibilityProblem, x0, args=[n, listofActions, listofSupport], bounds=(lb, ub), verbose=2,ftol=1e-15,xtol=1e-32,gtol=1e-20)
+    res_1 = least_squares(fun_FeasibilityProblem, x0, args=[n, listofActions, listofSupport,Acoes_det,lista_par], bounds=(lb, ub), verbose=2,ftol=1e-15,xtol=1e-32,gtol=1e-20)
     success = (res_1.cost <=1e-05)and(res_1.cost>=-1e-05)
     print("success:",success)
     print("opt:",res_1.cost)

@@ -1,6 +1,7 @@
 from itertools import product
 from itertools import combinations
 import Recursive_Backtracking
+import Gerador_Nplayers as ger
 
 ##@file Algoritmo2.py
 #@brief Algoritmo para encontrar um equilíbrio em jogos com n jogadores.
@@ -66,7 +67,13 @@ def tamanho_max(suporte):
 #@param Acoes lista de ações dos jogadores.
 
 #@retval p (completar!)
-def algoritmo2 (Acoes):
+def cria_AcoesNum(Acoes):
+    A = []
+    for j in Acoes:
+        A.append(range(len(j)))
+    return A
+
+def algoritmo2 (Acoes,Acoes_det,lista_par):
     tamanhos = [len(a) for a in Acoes] #Cria uma lista com os tamanhos de cada lista de suporte dos jogadores
 
     tamanhos_possíveis = [list(range(1,t+1)) for t in tamanhos] #Cria uma lista com todos os tamanhos de suporte possiveis para cada jogador
@@ -93,7 +100,7 @@ def algoritmo2 (Acoes):
             Di =[list(tup) for tup in list(combinations(Acoes[i],zid[i]))]
             D.append(Di)
         print("DDD", D)
-        res = Recursive_Backtracking.Recursive_Backtraking(S,D,1,Acoes)
+        res = Recursive_Backtracking.Recursive_Backtraking(S,D,1,Acoes, Acoes_det,lista_par)
         print("Algoritmo 2 - res",res)
         if res is not None:
             print("NASH - Support", res[1])
@@ -104,7 +111,20 @@ def algoritmo2 (Acoes):
     return None
 
 
+if __name__ == '__main__':
+    jogadores = ['Iveco','Mercedes','Ford']
+    perf = [3.5 + i*0.5 for i in range(6)]
+    lista_par_custo = [[0.0,2.0,2.0,1.0,39.0],[3.0,3.0,1.0,2.5,43.0],[2.0,5.0,1.0,1.5,35.0]]
+    precos = [90+i*5 for i in range(5)]
+    Acoes = ger.define_acoes(jogadores,lista_par_custo,perf,precos)
+    listofActions = cria_AcoesNum(Acoes)
+    media = 4.0
+    desv = 1.0
+    VendasTotais = 2316
+    Orc = 120
+    Gamma = 0.025
 
-resf = algoritmo2(listofActions)
-print("Final",resf)
+    lista_par = [perf, media, desv, VendasTotais, Orc, Gamma]
+    resf = algoritmo2(listofActions,Acoes,lista_par)
+    print("Final",resf)
 
