@@ -82,7 +82,7 @@ def gera_utilidade2(jogador,acao, listaAopp,lista_par, Acoes):
     payoff = ger.calc_Payoff(port,lista_par[0],densPerf,lista_par[2],lista_par[3])
     return payoff[jogador]
 
-
+'''''
 def gera_utilidade(jogador,acao, listaAopp, Utilidade): #retorna o payoff do jogador fixo a partir das ações dos demais jogadores
 
     n = len(Utilidade)
@@ -97,6 +97,7 @@ def gera_utilidade(jogador,acao, listaAopp, Utilidade): #retorna o payoff do jog
                 payoff = payoff[listaAopp[i-1]]
 
     return payoff
+'''''
 
 def probabilidade_acao(ListaP, jogador,acoes_oponentes, ListaSup):
     mult_prob = 1
@@ -108,29 +109,29 @@ def probabilidade_acao(ListaP, jogador,acoes_oponentes, ListaSup):
     return mult_prob
 
 
-def somatorio_c10(ListaSup, jogador,acao_jogador, ListaP, utilidade):
+def somatorio_c10(ListaSup, jogador,acao_jogador, ListaP, lista_par, Acoes):
     soma = 0
     ListaSup2 = ListaSup[0:jogador]+ListaSup[(jogador+1):len(ListaSup)] #Lista de Suporte de ações dos oponentes
     combSuport =[list(tup) for tup in product(*ListaSup2)] #Lista de combinações entre as ações dos oponentes
-    for e in combSuport:
-        soma=soma+probabilidade_acao(ListaP, jogador,e,ListaSup2)*gera_utilidade(jogador,acao_jogador, e,utilidade)
+    #for e in combSuport:
+    soma=soma+probabilidade_acao(ListaP, jogador,e,ListaSup2)*gera_utilidade2(jogador,acao_jogador,combSuport,lista_par, Acoes)
 
     return soma
 
 
-def c11(jogador, acao_jogador, ListaSup, ListaP, Lista_utilidade, ListaV):
+def c11(jogador, acao_jogador, ListaSup, ListaP, ListaV, lista_par, Acoes):
 
-    result_sub = ListaV[jogador] - somatorio_c10(ListaSup, jogador, acao_jogador, ListaP, Lista_utilidade)
+    result_sub = ListaV[jogador] - somatorio_c10(ListaSup, jogador, acao_jogador, ListaP, lista_par, Acoes)
 
     return result_sub
 
 
-def c1(numero_jogadores, ListaSup, ListaP, Lista_utilidade,  ListaV):
+def c1(numero_jogadores, ListaSup, ListaP, ListaV, lista_par, Acoes):
 
     arrayC1 = []
     for i in range(numero_jogadores):
         for a in ListaSup[i]:
-            arrayC1.append(c11(i, a, ListaSup, ListaP, Lista_utilidade, ListaV))
+            arrayC1.append(c11(i, a, ListaSup, ListaP, ListaV,lista_par, Acoes))
 
     return arrayC1
 
@@ -151,7 +152,7 @@ def c2(ListaP):
     return arrayC2
 
 
-def c3(ListaP,ListaV,Folgas, ListaSup, ListaNotSup, utilidade):
+def c3(ListaP,ListaV,Folgas, ListaSup, ListaNotSup, lista_par, Acoes):
     arrayC3 = []
     jfolga =0
     for j in range(len(ListaP)):
@@ -159,7 +160,7 @@ def c3(ListaP,ListaV,Folgas, ListaSup, ListaNotSup, utilidade):
            for a in range(len(ListaNotSup[j])):
                 print("ListaSup", ListaSup)
                 print("ListaNotSup", ListaNotSup)
-                result_sub = ListaV[j] - Folgas[jfolga][a] - somatorio_c10(ListaSup, j, ListaNotSup[j][a], ListaP, utilidade)
+                result_sub = ListaV[j] - Folgas[jfolga][a] - somatorio_c10(ListaSup, j, ListaNotSup[j][a], ListaP, lista_par, Acoes)
                 arrayC3.append(result_sub)
            jfolga = jfolga + 1
     return arrayC3
@@ -168,12 +169,6 @@ jogadores = [0, 1, 2]
 
 acoes =[[0, 1], [0, 1], [0, 1]]
 
-#def fun_payoff(jogador,listaA):
-
-
-#    payoff = utilidade[jogador][listaA[0]][listaA[1]][listaA[2]]
-
-#    return payoff
 
 prob_acao = [[0.25, 0.75], [0.40, 0.60], [0.80, 0.20]]
 
@@ -197,13 +192,12 @@ def fun_FeasibilityProblem(x0,arg1,arg2,arg3,arg4,arg5):
 
 
     [listaP,listaV,listaF] = splitVar(x0, listofSupport, listNotSupport,nPlayers,nActions,nActionsSup,nActionsNotSup)
-    r1 = c1(nPlayers, listofSupport, listaP,[[[[0.42, 0.37], [0.34, 0.60]], [[0.40, 0.34], [0.24, 0.42]]],
-             [[[0.24, 0.23], [0.40, 0.18]], [[0.26, 0.40], [0.18, 0.24]]],
-             [[[0.34, 0.40], [0.26, 0.22]], [[0.34, 0.26], [0.60, 0.34]]]], listaV)
+    r1 = c1(nPlayers, listofSupport, listaP, listaV, lista_par, Acoes_det)
 
     r2 =c2(listaP)
-    r3 = c3(listaP,listaV,listaF, listofSupport, listNotSupport,[[[[0.42, 0.37], [0.34, 0.60]], [[0.40, 0.34], [0.24, 0.42]]],
-    [[[0.24, 0.23], [0.40, 0.18]], [[0.26, 0.40], [0.18, 0.24]]], [[[0.34, 0.40], [0.26, 0.22]], [[0.34, 0.26], [0.60, 0.34]]]])
+
+    r3 = c3(listaP,listaV,listaF, listofSupport, listNotSupport, lista_par, Acoes_det)
+
     return np.array(r1+r2+r3)
 
 def FeasibilityProblem1(listofActions,listofSupport,Acoes_det,lista_par):
