@@ -28,11 +28,11 @@ import Gerador_Nplayers as ger
 #@param idj variavel boleana que recebe zero quando as acoes do jogador 1 e 1 quando as acoes do jogador 2
 #@retval Lista de listas .
 
-
+'''''
 utilidade = [[[[0.42, 0.37], [0.34, 0.60]], [[0.40, 0.34], [0.24, 0.42]]],
              [[[0.24, 0.23], [0.40, 0.18]], [[0.26, 0.40], [0.18, 0.24]]],
              [[[0.34, 0.40], [0.26, 0.22]], [[0.34, 0.26], [0.60, 0.34]]]]
-
+'''''
 
 def arrayToListOfList(listofActions,my_array):
     k=0
