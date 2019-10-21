@@ -1,35 +1,50 @@
 import IRSDS
 import Feasibility_Program
 
-def Recursive_Backtraking(S,D,i,listofActions,Acoes_det,lista_par):
+
+def Recursive_Backtraking(S, D, i, listofActions, Acoes_det, lista_par):
     n = len(D)
     print("RB D", D)
+    print("RB len(D)", len(D))
+    print("RB S", S)
 
     if i > n:
         print("i>n!!")
-        res = Feasibility_Program.FeasibilityProblem1(listofActions, S,Acoes_det,lista_par)
-        print("resultado",res)
+        res = Feasibility_Program.FeasibilityProblem1(listofActions, S, Acoes_det, lista_par)
+        print("resultado", res)
         if res[1]:
-            return [res[0],S]
+            return [res[0], S]
         else:
             print("resultado NONE")
             return None
     else:
-        newD =[]
-        Di = D[i-1]
+        newD = []
+        Di = D[i - 1]
         for s in Di:
-            S.append(s)
+            S2 = [s1 for s1 in S]
+            print("RB for i", i)
+            print("RB for s", s)
+            print("RB for S", S)
+            print("RB for S2", S2)
+            S2.append(s)
+            print("RB for S2", S2)
             Di.remove(s)
-            newD = [[si] for si in S ]
+            newS = [[si] for si in S2]
+            newD = D[i:n]
 
-            for j in range(i, len(D)):
-                newD.append(D[j])
-            print("lista S", S)
-            D = IRSDS.IRSDS(newD,listofActions)
-            if (D is not None):
-                resp = Recursive_Backtraking(S, D, i+1, listofActions,Acoes_det,lista_par)
+            print("newS", newS)
+            print("RB newD", newD)
+            print("RB len(newD)", len(newD))
+            newD2 = newS + newD
+            Dr = IRSDS.IRSDS(newD2, listofActions, Acoes_det, lista_par)
+
+            print("RB Dr", Dr)
+            if (Dr is not None):
+                print("Dr is not none")
+                print("RB len(Dr)", len(Dr))
+                resp = Recursive_Backtraking(S2, Dr, i + 1, listofActions, Acoes_det, lista_par)
                 if (resp is not None):
-                    print("resp",resp)
+                    print("resp", resp)
                     return resp
 
     return None

@@ -182,8 +182,7 @@ def calc_Payoff(lista_port, listaperf, dens, Orc, gamma):
     for j in lista_port:
         lp = lp + j
 
-    print
-    "lp: {}".format(lp)
+    print("lp: {}".format(lp))
     vendas = calcVendas(listaperf, dens, lp, Orc, gamma)
     print("vendas: {}".format(vendas))
     tamanho = [len(j) for j in lista_port]
@@ -208,6 +207,22 @@ def calc_Payoff(lista_port, listaperf, dens, Orc, gamma):
 
 
 def fun_main():
+    fatorIv = 43.0
+    fatorMb = 39.0
+    Jogadores = ['Iveco','Mercedes']
+    Performances = [3.5 + i*0.5 for i in range(6)]
+    custoP1 = [round(float((2+i)*2)/fatorIv,3) for i in range(6)]
+
+    custoP2 = [round(float(3.0 +3.0*(1.0+  i/2.5))/fatorMb,3) for i in range(6) ]
+    #custoP1 = [0.0 for i in range(6)]
+    #custoP2 = [0.0 for i in range(6) ]
+
+    custoIv1 = round(6.0/fatorIv,3)
+    custoIv2 =round(12.0/fatorIv,3)
+
+    custoMb1 = round(6.0/fatorMb,3)
+    custoMb2 =round(7.2/fatorMb,3)
+    custoMb3 =round(9.6/fatorMb,3)
     Orc = 120
     gamma = 0.025
     media = 4.0

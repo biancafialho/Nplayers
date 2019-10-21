@@ -65,8 +65,12 @@ def splitVar(x, listofSupport, listNotSupport,nPlayers,nActions,nActionsSup,nAct
 
     return [listaP,listaV,listaF]
 
-def gera_utilidade2(jogador,acao, listaAopp,lista_par, Acoes):
+def gera_utilidade(jogador,acao, listaAopp,lista_par, Acoes):
     #lista_par =[lista_perf,media,desv,VendasTotais,Orc,Gamma]
+    print("Len listaAopp:",len(listaAopp))
+    print("listaAopp:",listaAopp)
+    print("Len Acoes:",len(Acoes))
+    #print("Acoes:",Acoes)
     densPerf = ger.densidade(lista_par[0],lista_par[1],lista_par[2],lista_par[3])
     n = len(listaAopp)
     port = []
@@ -114,7 +118,7 @@ def somatorio_c10(ListaSup, jogador,acao_jogador, ListaP, lista_par, Acoes):
     ListaSup2 = ListaSup[0:jogador]+ListaSup[(jogador+1):len(ListaSup)] #Lista de Suporte de ações dos oponentes
     combSuport =[list(tup) for tup in product(*ListaSup2)] #Lista de combinações entre as ações dos oponentes
     #for e in combSuport:
-    soma=soma+probabilidade_acao(ListaP, jogador,e,ListaSup2)*gera_utilidade2(jogador,acao_jogador,combSuport,lista_par, Acoes)
+    soma=soma+probabilidade_acao(ListaP, jogador,e,ListaSup2)*gera_utilidade(jogador,acao_jogador,combSuport,lista_par, Acoes)
 
     return soma
 

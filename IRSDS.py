@@ -1,17 +1,22 @@
 import Feasibility_Program as fp
 from itertools import product
 
-def VerificaDominacao(i,a,al,listofUnion,fun_payoff,utilidade):
+def VerificaDominacao(i,a,al,listofUnion,fun_payoff,lista_par,acoes,acoes_det):
     soma = 0
-    ListaSup2 = listofUnion[0:i]+listofUnion[(i+1):len(listofUnion)] #Lista de Suporte de ações dos oponentes
+    print("i:",i)
+    print("a:",a)
+    print("al:",al)
+    print("listofUnion:",listofUnion)
+    ListaSup2 = listofUnion[0:i]+listofUnion[(i+1):len(listofUnion)] #Lista de Suporte de ações dos
+    print("ListaSup2:",ListaSup2)
     combSuport =[list(tup) for tup in product(*ListaSup2)] #Lista de combinações entre as ações dos oponentes
     dominada = True
     for e in combSuport:
         print("combSuport", combSuport)
         print("List Aopp:",e)
-        payoff1 = fun_payoff(i,a,e,utilidade)
+        payoff1 = fun_payoff(i,a,e,lista_par,acoes_det)
         print("Payoff1:",payoff1 )
-        payoff2 = fun_payoff(i,al,e,utilidade)
+        payoff2 = fun_payoff(i,al,e,lista_par,acoes_det)
         print("Payoff2:", payoff2)
         if (payoff1>= payoff2):
             print("IF-VerificaDominacao")
@@ -29,8 +34,9 @@ def RetiraDominadosCondicionalmente(j,D):
     return D
 
 
-def IRSDS(D,A):
+def IRSDS(D,A,Acoes_det,lista_par):
     print("IRSDS - D:", D)
+    print("len(D):", len(D))
     changed = None
 
     listUnion = []
@@ -55,7 +61,7 @@ def IRSDS(D,A):
                 Alal = [a2 for a2 in A[i] if a2!=a]
                 print("Alal:",Alal)
                 for al in Alal:
-                    f = VerificaDominacao(i, a, al, listUnion, fp.gera_utilidade, fp.utilidade)
+                    f = VerificaDominacao(i, a, al, listUnion, fp.gera_utilidade,lista_par,A,Acoes_det)
                     print("FFFFFFFFFF",f)
                     if(f):
                         print("D[i]:", D[i])

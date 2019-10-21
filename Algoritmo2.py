@@ -112,9 +112,15 @@ def algoritmo2 (Acoes,Acoes_det,lista_par):
 
 
 if __name__ == '__main__':
-    jogadores = ['Iveco','Mercedes','Ford']
+
+    jogadores = ['Iveco','Mercedes']
+    lista_par_custo = [[0.0,2.0,2.0,1.0,39.0],[3.0,3.0,1.0,2.5,43.0]]
+#    jogadores = ['Iveco','Mercedes','Ford']
+#    lista_par_custo = [[0.0,2.0,2.0,1.0,39.0],[3.0,3.0,1.0,2.5,43.0],[2.0,5.0,1.0,1.5,35.0]]
+
+
+
     perf = [3.5 + i*0.5 for i in range(6)]
-    lista_par_custo = [[0.0,2.0,2.0,1.0,39.0],[3.0,3.0,1.0,2.5,43.0],[2.0,5.0,1.0,1.5,35.0]]
     precos = [90+i*5 for i in range(5)]
     Acoes = ger.define_acoes(jogadores,lista_par_custo,perf,precos)
     listofActions = cria_AcoesNum(Acoes)
@@ -125,6 +131,7 @@ if __name__ == '__main__':
     Gamma = 0.025
 
     lista_par = [perf, media, desv, VendasTotais, Orc, Gamma]
+    print("lista_par",lista_par)
     resf = algoritmo2(listofActions,Acoes,lista_par)
     print("Final",resf)
 
