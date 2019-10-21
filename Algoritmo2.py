@@ -87,7 +87,7 @@ def algoritmo2 (Acoes,Acoes_det,lista_par):
     y = sorted(x, key=lambda x: (x[1],x[2])) #Ordena a lista de tamanhos de suportes em ordem crescente, primeiro pelo critáerio do somatório e segundo pelo máximo valor
     z = [i[0] for i in y] #Cria uma lista com as listas de tamanhos de suporte ordenadas
 
-    print("Z",z)
+    #print("Z",z)
 
     S =[]
 
@@ -101,13 +101,13 @@ def algoritmo2 (Acoes,Acoes_det,lista_par):
             D.append(Di)
         #print("DDD", D)
         res = Recursive_Backtracking.Recursive_Backtraking(S,D,1,Acoes, Acoes_det,lista_par)
-        print("Algoritmo 2 - res",res)
+        #print("Algoritmo 2 - res",res)
         if res is not None:
-            print("NASH - Support", res[1])
-            print("NASH - zid",zid)
+            #print("NASH - Support", res[1])
+            #print("NASH - zid",zid)
             return res[0]
 
-    print("Fim do Algoritmo sem equilíbrio")
+    #print("Fim do Algoritmo sem equilíbrio")
     return None
 
 
@@ -131,7 +131,7 @@ if __name__ == '__main__':
     Gamma = 0.025
 
     lista_par = [perf, media, desv, VendasTotais, Orc, Gamma]
-    print("lista_par",lista_par)
+    #print("lista_par",lista_par)
     resf = algoritmo2(listofActions,Acoes,lista_par)
-    print("Final",resf)
+    #print("Final",resf)
 

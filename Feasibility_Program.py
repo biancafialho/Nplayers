@@ -67,9 +67,9 @@ def splitVar(x, listofSupport, listNotSupport,nPlayers,nActions,nActionsSup,nAct
 
 def gera_utilidade(jogador,acao, listaAopp,lista_par, Acoes):
     #lista_par =[lista_perf,media,desv,VendasTotais,Orc,Gamma]
-    print("Len listaAopp:",len(listaAopp))
-    print("listaAopp:",listaAopp)
-    print("Len Acoes:",len(Acoes))
+    #print("Len listaAopp:",len(listaAopp))
+    #print("listaAopp:",listaAopp)
+    #print("Len Acoes:",len(Acoes))
     #print("Acoes:",Acoes)
     densPerf = ger.densidade(lista_par[0],lista_par[1],lista_par[2],lista_par[3])
     n = len(listaAopp)

@@ -9,42 +9,42 @@ def Recursive_Backtraking(S, D, i, listofActions, Acoes_det, lista_par):
     #print("RB S", S)
 
     if i > n:
-        print("i>n!!")
+        #print("i>n!!")
         res = Feasibility_Program.FeasibilityProblem1(listofActions, S, Acoes_det, lista_par)
-        print("resultado", res)
+        #print("resultado", res)
         if res[1]:
             return [res[0], S]
         else:
-            print("resultado NONE")
+            #print("resultado NONE")
             return None
     else:
         newD = []
         Di = D[i - 1]
         for s in Di:
             S2 = [s1 for s1 in S]
-            print("RB for i", i)
-            print("RB for s", s)
-            print("RB for S", S)
-            print("RB for S2", S2)
+            #print("RB for i", i)
+            #print("RB for s", s)
+            #print("RB for S", S)
+            #print("RB for S2", S2)
             S2.append(s)
-            print("RB for S2", S2)
+            #print("RB for S2", S2)
             Di.remove(s)
             newS = [[si] for si in S2]
             newD = D[i:n]
 
-            print("newS", newS)
-            print("RB newD", newD)
-            print("RB len(newD)", len(newD))
+            #print("newS", newS)
+            #print("RB newD", newD)
+            #print("RB len(newD)", len(newD))
             newD2 = newS + newD
             Dr = IRSDS.IRSDS(newD2, listofActions, Acoes_det, lista_par)
 
-            print("RB Dr", Dr)
+            #print("RB Dr", Dr)
             if (Dr is not None):
-                print("Dr is not none")
-                print("RB len(Dr)", len(Dr))
+                #print("Dr is not none")
+                #print("RB len(Dr)", len(Dr))
                 resp = Recursive_Backtraking(S2, Dr, i + 1, listofActions, Acoes_det, lista_par)
                 if (resp is not None):
-                    print("resp", resp)
+                    #print("resp", resp)
                     return resp
 
     return None

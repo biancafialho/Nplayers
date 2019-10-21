@@ -18,7 +18,6 @@ def todasComb(tamMax, Perf):
             subPerf.append(plist)
     return subPerf
 
-
 def RecGeraPort(Perf, Preco, Custo):
     # define subfunção recursiva para definir portfólio da empresa (lista de performances e preços)
     # entrada: lista de Performances, lista de preços
