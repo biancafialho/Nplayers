@@ -182,24 +182,25 @@ def calc_Payoff(lista_port, listaperf, dens, Orc, gamma):
     for j in lista_port:
         lp = lp + j
 
-    print("lp: {}".format(lp))
+    #print("lp: {}".format(lp))
     vendas = calcVendas(listaperf, dens, lp, Orc, gamma)
-    print("vendas: {}".format(vendas))
+    #print("vendas: {}".format(vendas))
     tamanho = [len(j) for j in lista_port]
-    print ("tamanho: {}".format(tamanho))
+    #print ("tamanho: {}".format(tamanho))
     vp = []
+
     inicio = 0
     for j in range(len(lista_port)):
         fim = inicio + tamanho[j]
         vj = vendas[inicio:fim]
         inicio = fim
-        print("vj: {}".format(vj))
+        #print("vj: {}".format(vj))
         pj = [ip[1] for ip in lista_port[j]]
-        print("pj: {}".format(pj))
+        #print("pj: {}".format(pj))
         cpj = [ip[2] for ip in lista_port[j]]
-        print("cpj: {}".format(cpj))
+        #print("cpj: {}".format(cpj))
         fj = calcLuc(pj, vj, cpj)
-        print("fj: {}".format(fj))
+        #print("fj: {}".format(fj))
         pay.append(fj)
 
     return pay

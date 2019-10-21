@@ -188,6 +188,7 @@ def fun_FeasibilityProblem(x0,arg1,arg2,arg3,arg4,arg5):
     nActionsNotSup = 0
     listNotSupport = []
 
+
     for i in range(nPlayers):
         nActions = nActions + len(listofActions[i])
         nActionsSup = nActionsSup + len(listofSupport[i])

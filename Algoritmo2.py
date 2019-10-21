@@ -93,13 +93,13 @@ def algoritmo2 (Acoes,Acoes_det,lista_par):
 
     for zid in z: #Gera todas as combinações possíveis de tamanhos de suporte de acordo com os tamanhos da lista ordenada
         S=[]
-        print("zid", zid)
+        #print("zid", zid)
         D = []
         listaD=[]
         for i in range(len(zid)):
             Di =[list(tup) for tup in list(combinations(Acoes[i],zid[i]))]
             D.append(Di)
-        print("DDD", D)
+        #print("DDD", D)
         res = Recursive_Backtracking.Recursive_Backtraking(S,D,1,Acoes, Acoes_det,lista_par)
         print("Algoritmo 2 - res",res)
         if res is not None:

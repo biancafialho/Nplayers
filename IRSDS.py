@@ -53,8 +53,8 @@ def IRSDS(D,A,Acoes_det,lista_par):
     while changed:
         changed = False
         for i in range(len(D)):
-            print("############### Jogador :", i)
-            print("List of Union i :", listUnion[i])
+            #print("############### Jogador :", i)
+            #print("List of Union i :", listUnion[i])
 
             for a in listUnion[i]:
                 print("a:", a)

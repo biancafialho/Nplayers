@@ -4,9 +4,9 @@ import Feasibility_Program
 
 def Recursive_Backtraking(S, D, i, listofActions, Acoes_det, lista_par):
     n = len(D)
-    print("RB D", D)
-    print("RB len(D)", len(D))
-    print("RB S", S)
+    #print("RB D", D)
+    #print("RB len(D)", len(D))
+    #print("RB S", S)
 
     if i > n:
         print("i>n!!")
