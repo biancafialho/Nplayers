@@ -25,6 +25,7 @@ def VerificaDominacao(i,a,al,listofUnion,fun_payoff,lista_par,acoes,acoes_det):
 
     return dominada
 
+
 def RetiraDominadosCondicionalmente(j,D):
 
     for di in D:

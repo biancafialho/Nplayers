@@ -39,7 +39,6 @@ def Recursive_Backtraking(S, D, i, listofActions, Acoes_det, lista_par):
             #print("RB len(newD)", len(newD))
             newD2 = newS + newD
             Dr = IRSDS.IRSDS(newD2, listofActions, Acoes_det, lista_par)
-
             #print("RB Dr", Dr)
             if (Dr is not None):
                 #print("Dr is not none")
