@@ -23,7 +23,6 @@ def Recursive_Backtraking(S, D, i, listofActions, Acoes_det, lista_par):
         for s in Di:
             S2 = [s1 for s1 in S]
             #print("print1 RB for S2", S2)
-
             #print("RB for i", i)
             #print("RB for s", s)
             #print("RB for S", S)

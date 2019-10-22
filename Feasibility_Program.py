@@ -180,9 +180,7 @@ def c3(ListaP,ListaV,Folgas, ListaSup, ListaNotSup, lista_par, Acoes):
     return arrayC3
 
 #jogadores = [0, 1, 2]
-
 #acoes =[[0, 1], [0, 1], [0, 1]]
-
 #prob_acao = [[0.25, 0.75], [0.40, 0.60], [0.80, 0.20]]
 
 def fun_FeasibilityProblem(x0,arg1,arg2,arg3,arg4,arg5):

@@ -89,6 +89,7 @@ def algoritmo2 (Acoes,Acoes_det,lista_par):
 
     S =[]
 
+
     for zid in z: #Gera todas as combinações possíveis de tamanhos de suporte de acordo com os tamanhos da lista ordenada
         S=[]
         print("zid", zid)

@@ -227,8 +227,6 @@ def fun_main():
     gamma = 0.025
     media = 4.0
     desv = 1.0
-
-
     portIVECO = [(4.0, 90, custoIv1), (5.5, 105, custoIv2)]  # com custos
     portMB = [(3.5, 90, custoMb1), (4.0, 95, custoMb2), (5.0, 100, custoMb3)]  # com custos
     Sit = [portIVECO, portMB, portIVECO + portMB]
