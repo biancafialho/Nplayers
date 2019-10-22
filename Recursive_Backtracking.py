@@ -12,6 +12,7 @@ def Recursive_Backtraking(S, D, i, listofActions, Acoes_det, lista_par):
         #print("i>n!!")
         #S_action = [l[0] for l in S]
         res = Feasibility_Program.FeasibilityProblem1(listofActions, S, Acoes_det, lista_par)
+        #print("resultado", res)
         if res[1]:
             return [res[0], S]
         else:
@@ -23,6 +24,7 @@ def Recursive_Backtraking(S, D, i, listofActions, Acoes_det, lista_par):
         for s in Di:
             S2 = [s1 for s1 in S]
             #print("print1 RB for S2", S2)
+
             #print("RB for i", i)
             #print("RB for s", s)
             #print("RB for S", S)
@@ -38,6 +40,7 @@ def Recursive_Backtraking(S, D, i, listofActions, Acoes_det, lista_par):
             #print("RB len(newD)", len(newD))
             newD2 = newS + newD
             Dr = IRSDS.IRSDS(newD2, listofActions, Acoes_det, lista_par)
+
             #print("RB Dr", Dr)
             if (Dr is not None):
                 #print("Dr is not none")

@@ -25,12 +25,14 @@ def VerificaDominacao(i,a,al,listofUnion,fun_payoff,lista_par,acoes,acoes_det):
 
     return dominada
 
+
 def RetiraDominadosCondicionalmente(j,D):
 
     for di in D:
         if j in di:
             D.remove(di)
     return D
+
 
 def IRSDS(D,A,Acoes_det,lista_par):
     #print("IRSDS - D:", D)
