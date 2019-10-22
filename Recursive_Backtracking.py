@@ -12,7 +12,6 @@ def Recursive_Backtraking(S, D, i, listofActions, Acoes_det, lista_par):
         #print("i>n!!")
         #S_action = [l[0] for l in S]
         res = Feasibility_Program.FeasibilityProblem1(listofActions, S, Acoes_det, lista_par)
-        #print("resultado", res)
         if res[1]:
             return [res[0], S]
         else:

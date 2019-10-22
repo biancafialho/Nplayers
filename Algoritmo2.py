@@ -87,7 +87,6 @@ def algoritmo2 (Acoes,Acoes_det,lista_par):
     y = sorted(x, key=lambda x: (x[1],x[2])) #Ordena a lista de tamanhos de suportes em ordem crescente, primeiro pelo critáerio do somatório e segundo pelo máximo valor
     z = [i[0] for i in y] #Cria uma lista com as listas de tamanhos de suporte ordenadas
 
-    #print("Z",z)
 
     S =[]
 

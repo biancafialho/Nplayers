@@ -240,7 +240,6 @@ def fun_main():
     calc_Payoff(port, Performances, densPerf, Orc, gamma)
 
 
-
 if __name__ == '__main__':
     fun_main()
 
