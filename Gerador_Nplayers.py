@@ -161,14 +161,14 @@ def densidade(perfs, media, desv, total):
     return dens
 
 
-def define_acoes(lista_jogadores, lista_par_custo, lista_perf, lista_preco):
+def define_acoes(lista_jogadores, lista_par_custo, lista_perf, lista_preco,MaxOpc):
     Portfolio = []
-    subperf = todasComb(3, lista_perf)
+    subperf = todasComb(MaxOpc, lista_perf)
     for j in range(len(lista_jogadores)):
         custo_jog = [round(
             float((lista_par_custo[j][0] + i / lista_par_custo[j][1]) * lista_par_custo[j][2] + lista_par_custo[j][3]) /
             lista_par_custo[j][4], 3) for i in range(len(lista_perf))]
-        subcusto = todasComb(3, custo_jog)
+        subcusto = todasComb(MaxOpc, custo_jog)
         Portfolio.append(GeraPort(subperf, lista_preco, subcusto))
     return Portfolio
 

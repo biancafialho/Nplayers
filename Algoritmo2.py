@@ -93,7 +93,7 @@ def algoritmo2 (Acoes,Acoes_det,lista_par):
 
     for zid in z: #Gera todas as combinações possíveis de tamanhos de suporte de acordo com os tamanhos da lista ordenada
         S=[]
-        #print("zid", zid)
+        print("zid", zid)
         D = []
         listaD=[]
         for i in range(len(zid)):
@@ -101,28 +101,28 @@ def algoritmo2 (Acoes,Acoes_det,lista_par):
             D.append(Di)
         #print("DDD", D)
         res = Recursive_Backtracking.Recursive_Backtraking(S,D,1,Acoes, Acoes_det,lista_par)
-        #print("Algoritmo 2 - res",res)
+        print("Algoritmo 2 - res",res)
         if res is not None:
-            #print("NASH - Support", res[1])
-            #print("NASH - zid",zid)
+            print("NASH - Support", res[1])
+            print("NASH - zid",zid)
             return res[0]
 
-    #print("Fim do Algoritmo sem equilíbrio")
+    print("Fim do Algoritmo sem equilíbrio")
     return None
 
 
 if __name__ == '__main__':
 
-    jogadores = ['Iveco','Mercedes']
-    lista_par_custo = [[0.0,2.0,2.0,1.0,39.0],[3.0,3.0,1.0,2.5,43.0]]
-#    jogadores = ['Iveco','Mercedes','Ford']
-#    lista_par_custo = [[0.0,2.0,2.0,1.0,39.0],[3.0,3.0,1.0,2.5,43.0],[2.0,5.0,1.0,1.5,35.0]]
+    #jogadores = ['Iveco','Mercedes']
+    #lista_par_custo = [[0.0,2.0,2.0,1.0,39.0],[3.0,3.0,1.0,2.5,43.0]]
+    jogadores = ['Iveco','Mercedes','Ford']
+    lista_par_custo = [[0.0,2.0,2.0,1.0,39.0],[3.0,3.0,1.0,2.5,43.0],[2.0,5.0,1.0,1.5,35.0]]
 
 
 
-    perf = [3.5 + i*0.5 for i in range(6)]
-    precos = [90+i*5 for i in range(5)]
-    Acoes = ger.define_acoes(jogadores,lista_par_custo,perf,precos)
+    perf = [3.5 + i*0.5 for i in range(2)] #mudar pra 3,4,5...
+    precos = [90+i*5 for i in range(2)] #mudar pra 3,4,5...
+    Acoes = ger.define_acoes(jogadores,lista_par_custo,perf,precos,2)
     listofActions = cria_AcoesNum(Acoes)
     media = 4.0
     desv = 1.0
@@ -133,5 +133,5 @@ if __name__ == '__main__':
     lista_par = [perf, media, desv, VendasTotais, Orc, Gamma]
     #print("lista_par",lista_par)
     resf = algoritmo2(listofActions,Acoes,lista_par)
-    #print("Final",resf)
+    print("Final",resf)
 

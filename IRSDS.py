@@ -12,11 +12,11 @@ def VerificaDominacao(i,a,al,listofUnion,fun_payoff,lista_par,acoes,acoes_det):
     combSuport =[list(tup) for tup in product(*ListaSup2)] #Lista de combinações entre as ações dos oponentes
     dominada = True
     for e in combSuport:
-        #print("combSuport", combSuport)
-        #print("List Aopp:",e)
-        payoff1 = fun_payoff(i,a,e,lista_par,acoes_det)
+        #print("VERIFICA combSuport", combSuport)
+        #print("VERIFICA List Aopp:",e)
+        payoff1 = fun_payoff(i,a,e,lista_par,acoes_det,"VERIFICA")
         #print("Payoff1:",payoff1 )
-        payoff2 = fun_payoff(i,al,e,lista_par,acoes_det)
+        payoff2 = fun_payoff(i,al,e,lista_par,acoes_det,"VERIFICA")
         #print("Payoff2:", payoff2)
         if (payoff1>= payoff2):
             #print("IF-VerificaDominacao")
@@ -52,10 +52,11 @@ def IRSDS(D,A,Acoes_det,lista_par):
     changed = True
     while changed:
         changed = False
+
         for i in range(len(D)):
             #print("############### Jogador :", i)
             #print("List of Union i :", listUnion[i])
-
+            #listUnion_i = listUnion[i]
             for a in listUnion[i]:
                 #print("a:", a)
                 Alal = [a2 for a2 in A[i] if a2!=a]
@@ -69,9 +70,14 @@ def IRSDS(D,A,Acoes_det,lista_par):
                         #print("D[i]:", D[i])
                         changed = True
                         #print("CHANGED")
+                        #print("print a:", a)
+                        #print("print2 List of Union i :", listUnion[i])
                         listUnion[i].remove(a)
-                        if len(D[i]) ==0:
+                        #print("print3 List of Union i :", listUnion[i])
+                        if len(D[i]) == 0:
+                            #print("none")
                             return None
+                        break
 
     return D
 

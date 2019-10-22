@@ -65,8 +65,10 @@ def splitVar(x, listofSupport, listNotSupport,nPlayers,nActions,nActionsSup,nAct
 
     return [listaP,listaV,listaF]
 
-def gera_utilidade(jogador,acao, listaAopp,lista_par, Acoes):
+def gera_utilidade(jogador,acao, listaAopp,lista_par, Acoes,ORIGEM):
     #lista_par =[lista_perf,media,desv,VendasTotais,Orc,Gamma]
+    #print("############jogador:", jogador)
+    #print("############ORIGEM:", ORIGEM)
     #print("Len listaAopp:",len(listaAopp))
     #print("listaAopp:",listaAopp)
     #print("Len Acoes:",len(Acoes))
@@ -74,16 +76,22 @@ def gera_utilidade(jogador,acao, listaAopp,lista_par, Acoes):
     densPerf = ger.densidade(lista_par[0],lista_par[1],lista_par[2],lista_par[3])
     n = len(listaAopp)
     port = []
-    for j in range(n):
+    for j in range(n+1):
+        #print("j", j)
         if j == jogador:
             port.append(Acoes[jogador][acao])
         else:
             if j < jogador:
+                #print("Acoes[j]:", Acoes[j])
+                #print("listaAopp[j]:", listaAopp[j])
                 port.append(Acoes[j][listaAopp[j]])
             else:
+                #print("Acoes[j]:", Acoes[j])
+                #print("listaAopp[j]:", listaAopp[j-1])
                 port.append(Acoes[j][listaAopp[j-1]])
 
     payoff = ger.calc_Payoff(port,lista_par[0],densPerf,lista_par[2],lista_par[3])
+    #print("payoff:",payoff)
     return payoff[jogador]
 
 '''''
@@ -116,9 +124,11 @@ def probabilidade_acao(ListaP, jogador,acoes_oponentes, ListaSup):
 def somatorio_c10(ListaSup, jogador,acao_jogador, ListaP, lista_par, Acoes):
     soma = 0
     ListaSup2 = ListaSup[0:jogador]+ListaSup[(jogador+1):len(ListaSup)] #Lista de Suporte de ações dos oponentes
+    #print("ListaSup2:",ListaSup2)
     combSuport =[list(tup) for tup in product(*ListaSup2)] #Lista de combinações entre as ações dos oponentes
-    #for e in combSuport:
-    soma=soma+probabilidade_acao(ListaP, jogador,e,ListaSup2)*gera_utilidade(jogador,acao_jogador,combSuport,lista_par, Acoes)
+    #print("combSuport:",combSuport)
+    for e in combSuport:
+        soma=soma+probabilidade_acao(ListaP, jogador,e,ListaSup2)*gera_utilidade(jogador,acao_jogador,e,lista_par, Acoes, "C10")
 
     return soma
 
@@ -162,8 +172,8 @@ def c3(ListaP,ListaV,Folgas, ListaSup, ListaNotSup, lista_par, Acoes):
     for j in range(len(ListaP)):
         if (ListaNotSup[j]!= []):
            for a in range(len(ListaNotSup[j])):
-                print("ListaSup", ListaSup)
-                print("ListaNotSup", ListaNotSup)
+                #print("ListaSup", ListaSup)
+                #print("ListaNotSup", ListaNotSup)
                 result_sub = ListaV[j] - Folgas[jfolga][a] - somatorio_c10(ListaSup, j, ListaNotSup[j][a], ListaP, lista_par, Acoes)
                 arrayC3.append(result_sub)
            jfolga = jfolga + 1

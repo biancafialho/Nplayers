@@ -6,10 +6,11 @@ def Recursive_Backtraking(S, D, i, listofActions, Acoes_det, lista_par):
     n = len(D)
     #print("RB D", D)
     #print("RB len(D)", len(D))
-    #print("RB S", S)
+    #print("print 0 RB S", S)
 
     if i > n:
         #print("i>n!!")
+        #S_action = [l[0] for l in S]
         res = Feasibility_Program.FeasibilityProblem1(listofActions, S, Acoes_det, lista_par)
         #print("resultado", res)
         if res[1]:
@@ -22,12 +23,14 @@ def Recursive_Backtraking(S, D, i, listofActions, Acoes_det, lista_par):
         Di = D[i - 1]
         for s in Di:
             S2 = [s1 for s1 in S]
+            #print("print1 RB for S2", S2)
+
             #print("RB for i", i)
             #print("RB for s", s)
             #print("RB for S", S)
             #print("RB for S2", S2)
             S2.append(s)
-            #print("RB for S2", S2)
+            #print("print 2 RB for S2", S2)
             Di.remove(s)
             newS = [[si] for si in S2]
             newD = D[i:n]
